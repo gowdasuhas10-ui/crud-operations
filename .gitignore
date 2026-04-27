@@ -9,7 +9,7 @@ __pycache__/
 .env
 
 # Build
-backend/static/
+# backend/static/ (Removed to allow tracking)
 
 # OS
 .DS_Store

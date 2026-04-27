@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupaTasks | Flask & Supabase CRUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-BediTBNm.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BuxpTBzH.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Management</h1>
+        
+        <form id="userForm" class="form-group">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <button type="submit" class="btn-primary">Add User</button>
+        </form>
+
+        <div id="loading" style="text-align: center; display: none; color: var(--text-muted);">Loading users...</div>
+        
+        <ul id="userList" class="user-list">
+            <!-- Users will be injected here -->
+        </ul>
+
+        <!-- AI Assistant Section -->
+        <div class="ai-section">
+            <h2>AI Assistant</h2>
+            <div id="aiChat" class="ai-chat-box">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Ask me to summarize data or add/delete users!</p>
+            </div>
+            <div class="ai-input-group">
+                <input type="text" id="aiInput" placeholder="Ask AI anything..." autocomplete="off">
+                <button id="aiSendBtn" class="btn-primary">Ask AI</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1.5rem;">Edit User</h2>
+            <form id="editForm" class="form-group">
+                <input type="hidden" id="editId">
+                <input type="text" id="editName" placeholder="Full Name" required>
+                <input type="email" id="editEmail" placeholder="Email Address" required>
+                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <button type="button" onclick="closeModal()" style="flex: 1; background: var(--border); color: white;">Cancel</button>
+                    <button type="submit" class="btn-primary" style="flex: 1;">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

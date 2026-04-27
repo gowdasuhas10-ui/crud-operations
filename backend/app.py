@@ -30,10 +30,20 @@ HEADERS = {
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+    full_path = os.path.join(app.static_folder, path)
+    if path != "" and os.path.exists(full_path):
         return send_from_directory(app.static_folder, path)
-    else:
+    elif path == "" or path == "index.html":
+        target = os.path.join(app.static_folder, 'index.html')
+        if not os.path.exists(target):
+            # Debugging: List files in the static folder if index.html is missing
+            try:
+                files = os.listdir(app.static_folder)
+                return jsonify({"error": "index.html not found", "files_in_static": files, "static_folder": app.static_folder}), 404
+            except Exception as e:
+                return jsonify({"error": "static folder not found", "details": str(e)}), 404
         return send_from_directory(app.static_folder, 'index.html')
+    return jsonify({"error": "not found", "path": path}), 404
 
 @app.route('/health', methods=['GET'])
 def health_check():
