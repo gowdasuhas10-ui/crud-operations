@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -27,13 +27,17 @@ HEADERS = {
     "Prefer": "return=representation"
 }
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
+@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def send_static(path):
-    return app.send_static_file(path)
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy", "static_folder": app.static_folder}), 200
 
 @app.route('/read', methods=['GET'])
 def get_users():
