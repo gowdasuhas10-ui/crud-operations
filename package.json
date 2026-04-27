@@ -1,8 +1,8 @@
 {
   "name": "supabase-flask-crud",
   "version": "1.0.0",
+  "type": "module",
   "description": "Full-stack CRUD app with Flask and Supabase",
-  "main": "backend/app.py",
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && python app.py",
