@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: supabase-crud-app
+    env: python
+    buildCommand: "npm install && npm run build && pip install -r backend/requirements.txt"
+    startCommand: "gunicorn backend.app:app"
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: TABLE_NAME
+        value: users
+      - key: OLLAMA_URL
+        value: http://localhost:11434/api/generate # Note: Ollama needs to be accessible from Render if used

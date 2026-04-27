@@ -1,0 +1,17 @@
+{
+  "name": "supabase-flask-crud",
+  "version": "1.0.0",
+  "description": "Full-stack CRUD app with Flask and Supabase",
+  "main": "backend/app.py",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && python app.py",
+    "dev:frontend": "vite",
+    "build": "vite build",
+    "start": "gunicorn backend.app:app"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "concurrently": "^8.2.2"
+  }
+}
