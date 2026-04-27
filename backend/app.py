@@ -7,7 +7,11 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-app = Flask(__name__, static_folder='static', static_url_path='')
+# Ensure static folder is found correctly in production
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(BASE_DIR, 'static')
+
+app = Flask(__name__, static_folder=static_dir, static_url_path='')
 CORS(app)
 
 # Supabase Configuration
